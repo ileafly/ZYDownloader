@@ -6,6 +6,7 @@
 //
 
 #import "ZYDownloader.h"
+#import "ZYMultiDelegate.h"
 
 @interface ZYDownloader()
 
@@ -19,13 +20,15 @@
 
 @property(nonatomic, assign) NSInteger currentActiveTaskCount;
 
+@property(nonatomic, strong) ZYMultiDelegate *delegate;
+
 @end
 
 @implementation ZYDownloader
 
 #pragma mark - Life Cycle
 
-+ (instancetype)sharedInstance {
++ (ZYDownloader *)sharedInstance {
     static dispatch_once_t onceToken;
     static ZYDownloader *instance = nil;
     dispatch_once(&onceToken,^{
@@ -47,6 +50,8 @@
         // 创建数组
         _privateDownloadingArray = [[NSMutableArray alloc] init];
         _privateDownloadedArray = [[NSMutableArray alloc] init];
+        // 创建delegate
+        _delegate = [[ZYMultiDelegate alloc] init];
     }
     return self;
 }
@@ -78,7 +83,17 @@
 }
 
 - (void)startTask:(ZYDownloadTask *)task {
-    [task start];
+    [task startWithProgress:^(ZYDownloadTask *task) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            for (id delegate in self.delegate.delegates) {
+                [delegate downloadTaskProgressDidChangeWithTask:task];
+            }
+        });
+    } completion:^(ZYDownloadTask *task, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+    }];
 }
 
 - (BOOL)pauseTask:(ZYDownloadTask *)task {
@@ -91,6 +106,28 @@
 
 - (BOOL)pauseAll {
     return NO;
+}
+
+/**
+ 注册多播代理
+ 
+ @param delegate 需要监听下载任务状态变化的对象
+ */
+- (void)registerDelegate:(id)delegate {
+    if (delegate) {
+        [self.delegate addDelegate:delegate];
+    }
+}
+
+/**
+ 取消代理
+ 
+ @param delegate 需要取消代理的对象
+ */
+- (void)unregisterDelegate:(id)delegate {
+    if (delegate) {
+        [self.delegate removeDelegate:delegate];
+    }
 }
 
 #pragma mark - Private Methods

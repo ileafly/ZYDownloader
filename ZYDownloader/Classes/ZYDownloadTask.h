@@ -84,6 +84,13 @@ typedef NS_ENUM(NSUInteger, ZYDownloadTaskState)
  */
 @property(nonatomic, strong) NSURLSessionDownloadTask *sessionDownloadTask;
 
-- (void)start;
+
+/**
+ 开启下载
+
+ @param progressBlock 下载进度block回调
+ @param completionBlock 下载完成block回调
+ */
+- (void)startWithProgress:(void (^)(ZYDownloadTask *task))progressBlock completion:(void (^)(ZYDownloadTask *task, NSError *error))completionBlock;
 
 @end

@@ -11,9 +11,13 @@
 
 #import "ZYDownloadTask.h"
 
-#pragma mark - Delegate Methods
+@protocol ZYDownloaderDelegate<NSObject>
 
-#pragma mark - Block
+@optional
+
+- (void)downloadTaskProgressDidChangeWithTask:(ZYDownloadTask *)task;
+
+@end
 
 @interface ZYDownloader : NSObject
 
@@ -22,7 +26,7 @@
 
  @return 单例对象
  */
-+ (instancetype)sharedInstance;
++ (ZYDownloader *)sharedInstance;
 
 /**
  最大下载数
@@ -89,5 +93,19 @@
  @return 是否成功
  */
 - (BOOL)pauseAll;
+
+/**
+ 注册多播代理
+
+ @param delegate 需要监听下载任务状态变化的对象
+ */
+- (void)registerDelegate:(id)delegate;
+
+/**
+ 取消代理
+
+ @param delegate 需要取消代理的对象
+ */
+- (void)unregisterDelegate:(id)delegate;
 
 @end

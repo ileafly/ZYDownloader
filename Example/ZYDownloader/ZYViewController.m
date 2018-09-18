@@ -9,7 +9,7 @@
 #import "ZYViewController.h"
 #import <ZYDownloader/ZYDownloader.h>
 
-@interface ZYViewController ()
+@interface ZYViewController ()<ZYDownloaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UIProgressView *processView;
 @property (weak, nonatomic) IBOutlet UILabel *stateLabel;
@@ -22,6 +22,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [[ZYDownloader sharedInstance] registerDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,5 +47,13 @@
 
 - (IBAction)cancelTask:(id)sender {
 }
+
+#pragma mark - ZYDownloaderDelegate
+
+- (void)downloadTaskProgressDidChangeWithTask:(ZYDownloadTask *)task {
+    _processView.progress = task.downloadProgress.fractionCompleted;
+    _stateLabel.text = [NSString stringWithFormat:@"下载中: %f", task.downloadProgress.fractionCompleted];
+}
+
 
 @end

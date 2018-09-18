@@ -14,6 +14,7 @@
 #import "ZYDownloader.h"
 #import "ZYDownloadFileManager.h"
 #import "ZYDownloadTask.h"
+#import "ZYMultiDelegate.h"
 
 FOUNDATION_EXPORT double ZYDownloaderVersionNumber;
 FOUNDATION_EXPORT const unsigned char ZYDownloaderVersionString[];
