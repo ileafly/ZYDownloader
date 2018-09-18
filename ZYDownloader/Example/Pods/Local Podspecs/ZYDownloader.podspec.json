@@ -1,0 +1,27 @@
+{
+  "name": "ZYDownloader",
+  "version": "0.1.0",
+  "summary": "A short description of ZYDownloader.",
+  "description": "基于AFNetworking封装的一个下载类，支持断点续传、批量下载、后台下载等功能",
+  "homepage": "https://github.com/luzhiyongGit/ZYDownloader",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "luzhiyongGit": "luzy@2345.com"
+  },
+  "source": {
+    "git": "https://github.com/luzhiyongGit/ZYDownloader.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "ZYDownloader/Classes/**/*",
+  "dependencies": {
+    "AFNetworking": [
+
+    ]
+  }
+}

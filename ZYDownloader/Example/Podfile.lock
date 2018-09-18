@@ -1,0 +1,33 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - ZYDownloader (0.1.0):
+    - AFNetworking
+
+DEPENDENCIES:
+  - ZYDownloader (from `../`)
+
+EXTERNAL SOURCES:
+  ZYDownloader:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  ZYDownloader: 0310a6cc3b92180ced0fd734abdabba828b9dd5f
+
+PODFILE CHECKSUM: e3740c8a5128749131350e0d573c07dede9e3b95
+
+COCOAPODS: 1.3.1

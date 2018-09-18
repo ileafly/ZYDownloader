@@ -1,0 +1,6 @@
+framework module Pods_ZYDownloader_Example {
+  umbrella header "Pods-ZYDownloader_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

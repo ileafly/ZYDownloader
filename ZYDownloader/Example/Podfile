@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ZYDownloader_Example' do
+  pod 'ZYDownloader', :path => '../'
+
+  target 'ZYDownloader_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

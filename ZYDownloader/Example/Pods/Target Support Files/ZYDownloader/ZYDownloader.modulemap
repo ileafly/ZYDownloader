@@ -1,0 +1,6 @@
+framework module ZYDownloader {
+  umbrella header "ZYDownloader-umbrella.h"
+
+  export *
+  module * { export * }
+}
