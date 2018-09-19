@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIProgressView *processView;
 @property (weak, nonatomic) IBOutlet UILabel *stateLabel;
 
+@property(nonatomic, strong) ZYDownloadTask *task;
+
 @end
 
 @implementation ZYViewController
@@ -37,12 +39,15 @@
     // 创建task并添加到Downloader中 
     ZYDownloadTask *task = [ZYDownloadTask downloadTask:[NSURL URLWithString:@"http://dldir1.qq.com/qqfile/QQforMac/QQ_V5.4.0.dmg"]];
     [[ZYDownloader sharedInstance] addTask:task];
+    _task = task;
 }
 
 - (IBAction)pauseTask:(id)sender {
+    [[ZYDownloader sharedInstance] pauseTask:_task];
 }
 
 - (IBAction)resumeTask:(id)sender {
+    [[ZYDownloader sharedInstance] resumeTask:_task];
 }
 
 - (IBAction)cancelTask:(id)sender {
@@ -53,6 +58,10 @@
 - (void)downloadTaskProgressDidChangeWithTask:(ZYDownloadTask *)task {
     _processView.progress = task.downloadProgress.fractionCompleted;
     _stateLabel.text = [NSString stringWithFormat:@"下载中: %f", task.downloadProgress.fractionCompleted];
+}
+
+- (void)downloadTaskDidPauseWithTask:(ZYDownloadTask *)task {
+    
 }
 
 
